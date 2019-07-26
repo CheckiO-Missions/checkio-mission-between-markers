@@ -50,6 +50,11 @@ TESTS = {
             "input": ['No <hi> one', '>', '<'],
             "answer": '',
             "explanation": "Wrong direction2"
+        },
+        {
+            "input": ['What is >>apple now?', '>>', ''],
+            "answer": 'apple fruit',
+            "explanation": "Empty end marker."
         }
     ]
 }
