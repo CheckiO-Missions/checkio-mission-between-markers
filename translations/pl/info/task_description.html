@@ -1,0 +1,39 @@
+<p>
+    Otrzymują Państwo ciąg znaków i dwa znaczniki (początkowy i końcowy). Musi Pan znaleźć podciąg zawarty między tymi dwoma znacznikami. Jest jednak kilka ważnych warunków:
+</p>
+
+<ul>
+	<li>Znaczniki początkowy i końcowy są zawsze różne.</li>
+	<li>Jeśli nie ma znacznika początkowego, to pierwszy znak powinien być uważany za początek ciągu.</li>
+	<li>Jeśli nie ma znacznika końcowego, ostatni znak powinien być uważany za koniec ciągu.</li>
+    <li>Jeśli brakuje znaczników początkowego i końcowego, proszę po prostu zwrócić cały ciąg.</li>
+	<li>Jeśli końcowy znacznik występuje przed znacznikiem początkowym, wówczas zwracany jest pusty ciąg znaków.</li>
+</ul>
+
+<p>
+   <strong>Wejście: </strong> Trzy argumenty. Wszystkie są ciągami znaków. Drugi i trzeci argument to znaczniki początkowy i końcowy.
+</p>
+
+<p>
+   <strong>Wyjście: </strong> Ciąg znaków. 
+</p>
+
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Przykład:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<p class="for_info_only">
+    <strong>Jak jest używany: </strong>
+    <i>do parsowania tekstów</i>
+</p>
+
+<p>
+    <strong>Warunek wstępny:</strong>
+    <i>nie może być więcej niż jeden końcowy znacznik i nie może być więcej niż jeden początkowy. Znacznik nie może być pustym ciągiem znaków</i>
+</p>
