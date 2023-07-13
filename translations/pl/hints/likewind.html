@@ -1,0 +1,92 @@
+<body data-author="likewind">
+
+<div class="question-answer">
+    <div class="question">
+        Nie wiem, jak podejść do tego zadania.
+    </div>
+    <div class="answer">
+        Musi Pan znaleźć indeks lewego znacznika ograniczającego (jeśli istnieje), prawego znacznika ograniczającego (ponownie - jeśli istnieje w ciągu),
+        i zwrócić tekst między nimi.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Jak mogę znaleźć indeksy tych znaczników?
+    </div>
+    <div class="answer">
+        Proszę użyć 
+       <a href='https://docs.python.org/3/library/stdtypes.html#str.find'>str.find() method</a>.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Czy mógłby Pan podać przykładowy kod?
+    </div>
+    <div class="answer">
+        Oczywiście, ale najpierw proszę zauważyć, że używając "find" pobierze Pan indeks pierwszego znaku znacznika.
+        Aby uzyskać indeks pierwszego znaku tekstu między znacznikami, należy dodać długość lewego znacznika.
+        <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)</pre>        
+    </div>
+</div>    
+
+<div class="question-answer">
+    <div class="question">
+        Jak znaleźć tekst między znacznikami?
+    </div>
+    <div class="answer">
+        Za pomocą wycinka:
+       <pre class="brush: python">        
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)
+    return text[begin_index:end_index]</pre>
+        begin_index - indeks pierwszego znaku tekstu pomiędzy znacznikami. end_index - indeks pierwszego znaku prawego znacznika.
+        Ponieważ podczas krojenia symbol na pozycji end_index nie jest uwzględniany w wyniku, otrzymujemy potrzebny tekst.
+        Innymi słowy, ostatnim znakiem, który faktycznie jest częścią naszej odpowiedzi, jest znak na pozycji "end_index - 1", który  
+        który jest ostatnim znakiem tekstu między znacznikami.
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+        Co jeśli w ciągu brakuje jednego ze znaczników?
+    </div>
+    <div class="answer">
+        Wtedy należy rozpocząć liczenie od pozycji 0 (jeśli nie ma lewego znacznika - begin) lub zakończyć na ostatnim znaku (jeśli nie ma prawego znacznika - end)
+        tekstu wejściowego (jeśli nie ma prawego znacznika - koniec). W przypadku, gdy wejściowy ciąg znaków nie zawiera żadnych znaczników, 
+        proszę zwrócić cały ciąg jako odpowiedź. 
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+       Czy mógłby Pan wyjaśnić to bardziej szczegółowo?
+    </div>
+    <div class="answer">
+        Oczywiście.
+       <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    if begin in text:
+        begin_index = text.find(begin) + len(begin)
+    else:
+        begin_index = 0
+        
+    if end in text:
+        end_index = text.find(end)
+    else:
+        end_index = len(text)
+        
+    return text[begin_index:end_index]</pre>
+        Przede wszystkim sprawdzamy, czy w tekście znajduje się lewy znacznik. Jeśli go nie ma, odpowiedź rozpocznie się od samego początku 
+        ciągu wejściowego. Jeśli jest, odpowiedź rozpocznie się od znaku następującego po ostatnim znaku znacznika.
+        Następnie sprawdzamy, czy w ciągu znaków znajduje się właściwy znacznik. Jeśli taki istnieje, ustawiamy go jako limit dla naszego ciągu wejściowego.
+        Jeśli tekst wejściowy nie zawiera właściwego znacznika, wówczas koniec tekstu wejściowego będzie granicą naszej odpowiedzi.
+    </div>
+</div>
+    
+</body>
