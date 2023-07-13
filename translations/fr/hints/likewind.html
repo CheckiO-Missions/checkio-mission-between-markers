@@ -1,0 +1,92 @@
+<body data-author="likewind">
+
+<div class="question-answer">
+    <div class="question">
+        Je ne sais pas comment aborder cette tâche.
+    </div>
+    <div class="answer">
+        Vous devez trouver l'index du marqueur de gauche (s'il y en a un), du marqueur de droite (encore une fois - s'il y en a un dans une chaîne),
+        et retourner le texte qui se trouve entre les deux.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Comment puis-je trouver les indices de ces marqueurs?
+    </div>
+    <div class="answer">
+        Utilisez le 
+       <a href='https://docs.python.org/3/library/stdtypes.html#str.find'>str.find() method</a>.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Pouvez-vous donner un exemple de code?
+    </div>
+    <div class="answer">
+        Bien sûr. Mais tout d'abord, notez qu'en utilisant "find", vous récupérez l'index du premier caractère du marqueur.
+        Pour obtenir l'indice du premier caractère du texte entre les marqueurs, vous devez ajouter la longueur du marqueur de gauche.
+        <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)</pre>        
+    </div>
+</div>    
+
+<div class="question-answer">
+    <div class="question">
+        Comment trouver le texte entre les marqueurs?
+    </div>
+    <div class="answer">
+        En utilisant une tranche:
+       <pre class="brush: python">        
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)
+    return text[begin_index:end_index]</pre>
+        begin_index - l'indice du premier caractère du texte entre les marqueurs. end_index - l'indice du premier caractère du marqueur de droite.
+        Étant donné que lors du découpage, le symbole à la position end_index n'est pas inclus dans le résultat, nous obtenons le texte nécessaire.
+        En d'autres termes, le dernier caractère qui fait partie de notre réponse est un caractère à la position 'end_index - 1', qui  
+        est le dernier caractère du texte entre les marqueurs.
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+        Que se passe-t-il si l'un des marqueurs est absent de la chaîne?
+    </div>
+    <div class="answer">
+        Vous devez alors commencer à compter à partir de la position 0 (s'il n'y a pas de marqueur gauche - début), ou terminer avec le dernier caractère du texte saisi (s'il n'y a pas de marqueur droit - fin)
+        du texte d'entrée (s'il n'y a pas de marqueur droit - fin). Si la chaîne d'entrée ne contient pas de marqueurs, 
+        vous devez renvoyer la chaîne entière comme réponse. 
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+       Pourriez-vous expliquer cela plus en détail?
+    </div>
+    <div class="answer">
+        Oui, bien sûr.
+       <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    if begin in text:
+        begin_index = text.find(begin) + len(begin)
+    else:
+        begin_index = 0
+        
+    if end in text:
+        end_index = text.find(end)
+    else:
+        end_index = len(text)
+        
+    return text[begin_index:end_index]</pre>
+        Tout d'abord, nous vérifions la présence du marqueur de gauche dans le texte. S'il n'y en a pas, la réponse commencera au tout début de la chaîne de saisie 
+        de la chaîne d'entrée. S'il y en a un, la réponse commencera par le caractère suivant le dernier caractère du marqueur.
+        Ensuite, nous vérifions la présence du bon marqueur dans la chaîne. S'il y en a un, nous en faisons la limite de notre chaîne d'entrée.
+        Si le texte d'entrée ne contient pas le bon marqueur, la fin du texte d'entrée sera la limite de notre réponse.
+    </div>
+</div>
+    
+</body>
