@@ -1,0 +1,92 @@
+<body data-author="likewind">
+
+<div class="question-answer">
+    <div class="question">
+        我不知道该如何完成这项任务。
+    </div>
+    <div class="answer">
+        您需要找到左侧限制标记（如果有的话）和右侧限制标记（同样，如果字符串中有的话）的索引、
+        并返回它们之间的文本。
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        如何找到这些标记的索引？
+    </div>
+    <div class="answer">
+        使用 
+       <a href='https://docs.python.org/3/library/stdtypes.html#str.find'>str.find() method</a>.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        您能给出一个示例代码吗？
+    </div>
+    <div class="answer">
+        当然可以，但首先请注意，通过使用 "查找"，您将获取标记第一个字符的索引。
+        为了获取标记之间文本第一个字符的索引，您需要加上左边标记的长度。
+        <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)</pre>        
+    </div>
+</div>    
+
+<div class="question-answer">
+    <div class="question">
+        如何查找标记之间的文本？
+    </div>
+    <div class="answer">
+        使用切片：
+       <pre class="brush: python">        
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)
+    return text[begin_index:end_index]</pre>
+        begin_index - 标记之间文本第一个字符的索引。 end_index - 右侧标记第一个字符的索引。
+        由于在切片时，end_index位置的符号不包含在结果中，因此我们可以得到所需的文本。
+        换句话说，最后一个字符实际上是我们答案的一部分，它位于 "end_index - 1 "位置，即  
+        是标记之间文本的最后一个字符。
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+        如果字符串中缺少一个标记怎么办？
+    </div>
+    <div class="answer">
+        那么您需要从位置 0 开始计数（如果没有左标记 - 开始），或者从输入文本的最后一个字符结束计数（如果没有右标记 - 结束）。
+        结束（如果没有右标记 - 结束）。如果输入字符串不包含任何标记、 
+        应返回整个字符串作为答案。 
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+       您能详细解释一下吗？
+    </div>
+    <div class="answer">
+        当然可以。
+       <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    if begin in text:
+        begin_index = text.find(begin) + len(begin)
+    else:
+        begin_index = 0
+        
+    if end in text:
+        end_index = text.find(end)
+    else:
+        end_index = len(text)
+        
+    return text[begin_index:end_index]</pre>
+        首先，我们检查文本中的左标记。如果没有，那么答案将从输入字符串的开头开始。 
+        开始。如果有，那么答案将从该标记最后一个字符之后的字符开始。
+        然后，我们检查字符串中是否有正确的标记。如果有，则将其作为输入字符串的极限。
+        如果输入文本不包含正确的标记，那么输入文本的末尾将是我们答案的极限。
+    </div>
+</div>
+    
+</body>
