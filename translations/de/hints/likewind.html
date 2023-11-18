@@ -1,0 +1,92 @@
+<body data-author="likewind">
+
+<div class="question-answer">
+    <div class="question">
+        Ich weiß nicht, wie ich diese Aufgabe angehen soll.
+    </div>
+    <div class="answer">
+        Sie müssen den Index der linken Begrenzungsmarke (wenn es eine gibt), der rechten Begrenzungsmarke (wieder - wenn es eine in einer Zeichenkette gibt) finden,
+        und den Text dazwischen zurückgeben.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Wie kann ich die Indizes dieser Markierungen herausfinden?
+    </div>
+    <div class="answer">
+        Verwenden Sie die 
+       <a href='https://docs.python.org/3/library/stdtypes.html#str.find'>str.find() method</a>.
+    </div>
+</div>
+
+<div class="question-answer">
+    <div class="question">
+        Können Sie einen Beispielcode nennen?
+    </div>
+    <div class="answer">
+        Sicher. Aber beachten Sie zunächst, dass Sie mit 'find' den Index des ersten Zeichens der Markierung abrufen.
+        Um den Index des ersten Zeichens des Textes zwischen den Markierungen zu erhalten, müssen Sie die Länge der linken Markierung hinzufügen.
+        <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)</pre>        
+    </div>
+</div>    
+
+<div class="question-answer">
+    <div class="question">
+        Wie findet man den Text zwischen den Markierungen?
+    </div>
+    <div class="answer">
+        Durch die Verwendung eines Slice:
+       <pre class="brush: python">        
+def between_markers(text: str, begin: str, end: str) -> str:
+    begin_index = text.find(begin) + len(begin)
+    end_index = text.find(end)
+    return text[begin_index:end_index]</pre>
+        begin_index - der Index des ersten Zeichens des Textes zwischen den Markierungen. end_index - der Index des ersten Zeichens der rechten Markierung.
+        Da das Symbol an der end_index-Position nicht im Ergebnis enthalten ist, erhalten wir den benötigten Text.
+        Mit anderen Worten, das letzte Zeichen, das tatsächlich Teil unserer Antwort ist, ist ein Zeichen an der Position 'end_index - 1', das  
+        das letzte Zeichen des Textes zwischen den Markierungen ist.
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+        Was ist, wenn eine der Markierungen in der Zeichenkette fehlt?
+    </div>
+    <div class="answer">
+        Dann müssen Sie die Zählung an der Position 0 beginnen (wenn es keine linke Markierung gibt - begin) oder mit dem letzten Zeichen
+        des Eingabetextes (wenn es keine rechte Markierung gibt - Ende). Falls die Eingabezeichenfolge keine Markierungen enthält, 
+        sollten Sie die gesamte Zeichenkette als Antwort zurückgeben. 
+    </div>
+</div>
+    
+<div class="question-answer">
+    <div class="question">
+       Könnten Sie dies näher erläutern?
+    </div>
+    <div class="answer">
+        Sicherlich.
+       <pre class="brush: python">
+def between_markers(text: str, begin: str, end: str) -> str:
+    if begin in text:
+        begin_index = text.find(begin) + len(begin)
+    else:
+        begin_index = 0
+        
+    if end in text:
+        end_index = text.find(end)
+    else:
+        end_index = len(text)
+        
+    return text[begin_index:end_index]</pre>
+        Zunächst einmal prüfen wir, ob die linke Markierung im Text vorhanden ist. Wenn es keine gibt, beginnt die Antwort ganz am Anfang 
+        der Eingabezeichenkette. Wenn eine vorhanden ist, beginnt die Antwort mit dem Zeichen, das auf das letzte Zeichen der Markierung folgt.
+        Danach suchen wir nach der richtigen Markierung in der Zeichenkette. Wenn es eine gibt, machen wir sie zur Begrenzung für unsere Eingabezeichenfolge.
+        Wenn der Eingabetext die richtige Markierung nicht enthält, wird das Ende des Eingabetextes die Grenze unserer Antwort sein.
+    </div>
+</div>
+    
+</body>
